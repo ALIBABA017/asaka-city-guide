@@ -5,7 +5,7 @@ import { events } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/events/$id")({
   head: ({ loaderData }) => {
-    const e = loaderData;
+    const e = loaderData as (typeof events)[number] | undefined;
     return {
       meta: [
         { title: e ? `${e.title} — Smart Asaka` : "Event — Smart Asaka" },
@@ -17,6 +17,7 @@ export const Route = createFileRoute("/events/$id")({
       ],
     };
   },
+
   loader: ({ params }) => {
     const e = events.find((x) => x.id === params.id);
     if (!e) throw notFound();

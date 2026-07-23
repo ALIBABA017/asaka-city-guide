@@ -5,7 +5,7 @@ import { allBusinesses } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/business/$slug")({
   head: ({ loaderData }) => {
-    const b = loaderData;
+    const b = loaderData as (typeof allBusinesses)[number] | undefined;
     return {
       meta: [
         { title: b ? `${b.name} — Smart Asaka` : "Business — Smart Asaka" },
@@ -17,6 +17,7 @@ export const Route = createFileRoute("/business/$slug")({
       ],
     };
   },
+
   loader: ({ params }) => {
     const b = allBusinesses.find((x) => x.slug === params.slug);
     if (!b) throw notFound();
