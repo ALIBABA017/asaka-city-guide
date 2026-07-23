@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { allBusinesses } from "@/lib/mock-data";
+import { useI18n } from "@/lib/i18n";
+
 
 export const Route = createFileRoute("/business/$slug")({
   head: ({ loaderData }) => {
