@@ -247,7 +247,7 @@ function BusinessPage() {
 
             {/* FAQ */}
             <section className="glass rounded-2xl p-6">
-              <h2 className="text-xl font-semibold text-white">FAQ</h2>
+              <h2 className="text-xl font-semibold text-white">{t("biz.faq")}</h2>
               <div className="mt-3 space-y-2">
                 {FAQS.map((f, i) => (
                   <div key={i} className="rounded-xl border border-white/10 bg-white/5">
@@ -274,7 +274,7 @@ function BusinessPage() {
           {/* Sidebar */}
           <aside className="space-y-4">
             <section className="glass rounded-2xl p-5">
-              <h3 className="text-sm font-semibold text-white">Contact</h3>
+              <h3 className="text-sm font-semibold text-white">{t("biz.contact")}</h3>
               <div className="mt-3 space-y-2 text-sm">
                 <a href={`tel:${b.phone}`} className="flex items-center gap-2 text-muted-foreground hover:text-white">
                   📞 <span>{b.phone}</span>
@@ -295,7 +295,7 @@ function BusinessPage() {
             </section>
 
             <section className="glass rounded-2xl p-5">
-              <h3 className="text-sm font-semibold text-white">Location</h3>
+              <h3 className="text-sm font-semibold text-white">{t("biz.location")}</h3>
               <svg viewBox="0 0 300 160" className="mt-3 h-40 w-full rounded-xl bg-white/[0.03]">
                 <defs>
                   <pattern id="mgrid" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -311,7 +311,7 @@ function BusinessPage() {
             </section>
 
             <section className="glass rounded-2xl p-5">
-              <h3 className="text-sm font-semibold text-white">Special Offers</h3>
+              <h3 className="text-sm font-semibold text-white">{t("biz.offers")}</h3>
               <div className="mt-3 space-y-2">
                 <div className="rounded-xl border border-white/10 bg-white/5 p-3">
                   <div className="flex items-center justify-between">
@@ -331,7 +331,7 @@ function BusinessPage() {
             </section>
 
             <section className="glass rounded-2xl p-5">
-              <h3 className="text-sm font-semibold text-white">Related</h3>
+              <h3 className="text-sm font-semibold text-white">{t("biz.related")}</h3>
               <div className="mt-3 space-y-2">
                 {RELATED.map((r) => (
                   <Link
