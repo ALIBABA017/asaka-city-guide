@@ -1,16 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import { events } from "@/lib/mock-data";
+import { useI18n } from "@/lib/i18n";
 
 export function EventsSection() {
+  const { t } = useI18n();
   return (
     <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
       <div className="mb-6 flex items-end justify-between">
         <div>
-          <h2 className="text-2xl font-semibold text-white">Upcoming events</h2>
-          <p className="text-sm text-muted-foreground">Don't miss what's happening this month.</p>
+          <h2 className="text-2xl font-semibold text-white">{t("events.title")}</h2>
+          <p className="text-sm text-muted-foreground">{t("events.subtitle")}</p>
         </div>
         <Link to="/events" className="text-sm text-brand hover:underline">
-          View all →
+          {t("events.viewAll")}
         </Link>
       </div>
       <div className="grid gap-4 md:grid-cols-3">

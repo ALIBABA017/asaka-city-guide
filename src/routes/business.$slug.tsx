@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { allBusinesses } from "@/lib/mock-data";
+import { useI18n } from "@/lib/i18n";
+
 
 export const Route = createFileRoute("/business/$slug")({
   head: ({ loaderData }) => {
@@ -89,6 +91,7 @@ const RELATED = [
 
 function BusinessPage() {
   const b = Route.useLoaderData();
+  const { t } = useI18n();
   const [tab, setTab] = useState<"menu" | "reviews" | "book">("menu");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [chatOpen, setChatOpen] = useState(false);
@@ -96,6 +99,7 @@ function BusinessPage() {
     { from: "ai", text: "Hi! Ask me about Osh Markazi." },
   ]);
   const [chatInput, setChatInput] = useState("");
+
 
   const todayIdx = useMemo(() => {
     const js = new Date().getDay(); // 0=Sun
@@ -115,8 +119,9 @@ function BusinessPage() {
 
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <Link to="/" className="text-sm text-muted-foreground hover:text-white">
-          ← Back
+          {t("biz.back")}
         </Link>
+
 
         {/* Cover */}
         <div className="glass mt-4 overflow-hidden rounded-3xl">
@@ -136,15 +141,16 @@ function BusinessPage() {
               </div>
             </div>
             <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-teal/15 px-3 py-1 text-sm text-teal">
-              <span className="h-1.5 w-1.5 rounded-full bg-teal" /> Open now
+              <span className="h-1.5 w-1.5 rounded-full bg-teal" /> {t("card.openNow")}
             </div>
+
 
             <div className="mt-6 grid gap-2 sm:grid-cols-2">
               <a
                 href={`tel:${b.phone}`}
                 className="rounded-xl bg-white/5 py-3 text-center text-sm text-white hover:bg-white/10"
               >
-                📞 Call {b.phone}
+                📞 {t("card.call")} {b.phone}
               </a>
               <a
                 href={`https://maps.google.com/?q=${encodeURIComponent(b.name + " Asaka")}`}
@@ -152,8 +158,9 @@ function BusinessPage() {
                 rel="noreferrer"
                 className="rounded-xl bg-white/5 py-3 text-center text-sm text-white hover:bg-white/10"
               >
-                🧭 Directions
+                🧭 {t("card.directions")}
               </a>
+
             </div>
           </div>
         </div>
@@ -163,7 +170,7 @@ function BusinessPage() {
           <div className="space-y-6 lg:col-span-2">
             {/* About */}
             <section className="glass rounded-2xl p-6">
-              <h2 className="text-xl font-semibold text-white">About</h2>
+              <h2 className="text-xl font-semibold text-white">{t("biz.about")}</h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Authentic Uzbek cuisine since 2010. Famous for our signature plov, samsa, and
                 lagman. Family-owned restaurant using recipes passed down through three
@@ -180,15 +187,16 @@ function BusinessPage() {
                 </div>
                 <div>
                   <div className="text-lg font-semibold text-white">Abdulla Karimov</div>
-                  <div className="text-sm text-muted-foreground">Owner & Head Chef</div>
+                  <div className="text-sm text-muted-foreground">{t("biz.owner")}</div>
                   <div className="text-xs text-teal">Since 2010</div>
+
                 </div>
               </div>
             </section>
 
             {/* Hours */}
             <section className="glass rounded-2xl p-6">
-              <h2 className="text-xl font-semibold text-white">Working Hours</h2>
+              <h2 className="text-xl font-semibold text-white">{t("biz.hours")}</h2>
               <div className="mt-3 divide-y divide-white/10 overflow-hidden rounded-xl border border-white/10">
                 {HOURS.map((h, i) => (
                   <div
@@ -201,7 +209,7 @@ function BusinessPage() {
                     }
                   >
                     <span className={i === todayIdx ? "font-semibold text-white" : ""}>
-                      {h.day} {i === todayIdx && <span className="ml-1 text-xs text-brand">• Today</span>}
+                      {h.day} {i === todayIdx && <span className="ml-1 text-xs text-brand">{t("biz.today")}</span>}
                     </span>
                     <span className={i === todayIdx ? "text-white" : ""}>{h.hours}</span>
                   </div>
@@ -212,18 +220,20 @@ function BusinessPage() {
             {/* Tabs */}
             <section className="glass rounded-2xl p-6">
               <div className="flex gap-2 rounded-xl bg-white/5 p-1">
-                {(["menu", "reviews", "book"] as const).map((t) => (
+                {(["menu", "reviews", "book"] as const).map((key) => (
                   <button
-                    key={t}
-                    onClick={() => setTab(t)}
+                    key={key}
+                    onClick={() => setTab(key)}
                     className={
-                      "flex-1 rounded-lg px-3 py-2 text-sm font-medium capitalize transition " +
-                      (tab === t
+                      "flex-1 rounded-lg px-3 py-2 text-sm font-medium transition " +
+                      (tab === key
                         ? "bg-gradient-brand text-white shadow-glow"
                         : "text-muted-foreground hover:text-white")
                     }
                   >
-                    {t === "book" ? "Book Table" : t}
+                    {t(`biz.${key}`)}
+
+
                   </button>
                 ))}
               </div>
@@ -237,7 +247,7 @@ function BusinessPage() {
 
             {/* FAQ */}
             <section className="glass rounded-2xl p-6">
-              <h2 className="text-xl font-semibold text-white">FAQ</h2>
+              <h2 className="text-xl font-semibold text-white">{t("biz.faq")}</h2>
               <div className="mt-3 space-y-2">
                 {FAQS.map((f, i) => (
                   <div key={i} className="rounded-xl border border-white/10 bg-white/5">
@@ -264,7 +274,7 @@ function BusinessPage() {
           {/* Sidebar */}
           <aside className="space-y-4">
             <section className="glass rounded-2xl p-5">
-              <h3 className="text-sm font-semibold text-white">Contact</h3>
+              <h3 className="text-sm font-semibold text-white">{t("biz.contact")}</h3>
               <div className="mt-3 space-y-2 text-sm">
                 <a href={`tel:${b.phone}`} className="flex items-center gap-2 text-muted-foreground hover:text-white">
                   📞 <span>{b.phone}</span>
@@ -285,7 +295,7 @@ function BusinessPage() {
             </section>
 
             <section className="glass rounded-2xl p-5">
-              <h3 className="text-sm font-semibold text-white">Location</h3>
+              <h3 className="text-sm font-semibold text-white">{t("biz.location")}</h3>
               <svg viewBox="0 0 300 160" className="mt-3 h-40 w-full rounded-xl bg-white/[0.03]">
                 <defs>
                   <pattern id="mgrid" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -301,7 +311,7 @@ function BusinessPage() {
             </section>
 
             <section className="glass rounded-2xl p-5">
-              <h3 className="text-sm font-semibold text-white">Special Offers</h3>
+              <h3 className="text-sm font-semibold text-white">{t("biz.offers")}</h3>
               <div className="mt-3 space-y-2">
                 <div className="rounded-xl border border-white/10 bg-white/5 p-3">
                   <div className="flex items-center justify-between">
@@ -321,7 +331,7 @@ function BusinessPage() {
             </section>
 
             <section className="glass rounded-2xl p-5">
-              <h3 className="text-sm font-semibold text-white">Related</h3>
+              <h3 className="text-sm font-semibold text-white">{t("biz.related")}</h3>
               <div className="mt-3 space-y-2">
                 {RELATED.map((r) => (
                   <Link

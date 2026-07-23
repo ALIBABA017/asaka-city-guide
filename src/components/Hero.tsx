@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { popularTags } from "@/lib/mock-data";
+import { useI18n } from "@/lib/i18n";
 
 type Props = {
   query: string;
@@ -10,6 +11,7 @@ type Props = {
 
 export function Hero({ query, onQueryChange, activeTag, onTagChange }: Props) {
   const [tooltip, setTooltip] = useState(false);
+  const { t } = useI18n();
 
   return (
     <section className="relative overflow-hidden">
@@ -28,15 +30,15 @@ export function Hero({ query, onQueryChange, activeTag, onTagChange }: Props) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-teal" />
             </span>
-            Now serving 1,200+ businesses in Asaka
+            {t("hero.badge")}
           </div>
 
           <h1 className="mt-6 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            Everything in <span className="text-gradient">Asaka</span>.<br /> One platform.
+            <span className="text-gradient">{t("hero.title.a")}</span>
+            <br /> {t("hero.title.b")}
           </h1>
-          <p className="mt-4 max-w-xl text-base text-muted-foreground">
-            Discover restaurants, clinics, schools, and services near you — with real reviews, live hours, and one-tap booking.
-          </p>
+
+          <p className="mt-4 max-w-xl text-base text-muted-foreground">{t("hero.subtitle")}</p>
 
           <div className="mt-8 w-full max-w-2xl">
             <div className="glass flex items-center gap-2 rounded-2xl p-2 shadow-card">
@@ -45,7 +47,7 @@ export function Hero({ query, onQueryChange, activeTag, onTagChange }: Props) {
                 value={query}
                 onChange={(e) => onQueryChange(e.target.value)}
                 type="text"
-                placeholder="Search restaurants, doctors, schools..."
+                placeholder={t("hero.search.placeholder")}
                 className="flex-1 bg-transparent px-2 py-3 text-white outline-none placeholder:text-muted-foreground"
               />
               <button
@@ -58,7 +60,7 @@ export function Hero({ query, onQueryChange, activeTag, onTagChange }: Props) {
                 🎙️
                 {tooltip && (
                   <span className="absolute -bottom-9 right-0 whitespace-nowrap rounded-md bg-popover px-2 py-1 text-xs text-white shadow-card">
-                    Voice search coming soon
+                    {t("hero.voice.tooltip")}
                   </span>
                 )}
               </button>
@@ -66,17 +68,17 @@ export function Hero({ query, onQueryChange, activeTag, onTagChange }: Props) {
                 type="button"
                 className="inline-flex h-10 items-center gap-1.5 rounded-xl bg-gradient-brand px-4 text-sm font-medium text-white shadow-glow"
               >
-                Search
+                {t("hero.search.button")}
               </button>
             </div>
 
             <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-              {popularTags.map((t) => {
-                const active = activeTag === t;
+              {popularTags.map((tag) => {
+                const active = activeTag === tag;
                 return (
                   <button
-                    key={t}
-                    onClick={() => onTagChange(active ? null : t)}
+                    key={tag}
+                    onClick={() => onTagChange(active ? null : tag)}
                     type="button"
                     className={
                       "rounded-full border px-3 py-1.5 text-xs transition " +
@@ -85,7 +87,7 @@ export function Hero({ query, onQueryChange, activeTag, onTagChange }: Props) {
                         : "border-white/10 bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-white")
                     }
                   >
-                    {t}
+                    {tag}
                   </button>
                 );
               })}
@@ -98,7 +100,7 @@ export function Hero({ query, onQueryChange, activeTag, onTagChange }: Props) {
                   type="button"
                   className="rounded-full px-3 py-1.5 text-xs text-muted-foreground underline-offset-4 hover:text-white hover:underline"
                 >
-                  Clear
+                  {t("hero.clear")}
                 </button>
               )}
             </div>

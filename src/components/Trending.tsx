@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { trending } from "@/lib/mock-data";
 import { BusinessCard } from "./BusinessCard";
+import { useI18n } from "@/lib/i18n";
 
 const filters = [
   { key: "all", label: "All" },
@@ -10,15 +11,17 @@ const filters = [
 
 export function Trending() {
   const [f, setF] = useState("all");
+  const { t } = useI18n();
   const items = f === "all" ? trending : trending.filter((t) => t.categorySlug === f || (f === "beauty" && t.slug === "fitlife-gym"));
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
       <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-semibold text-white">Trending in Asaka</h2>
+          <h2 className="text-2xl font-semibold text-white">{t("trending.title")}</h2>
           <p className="text-sm text-muted-foreground">People are loving these this week.</p>
         </div>
+
         <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1">
           {filters.map((x) => (
             <button
