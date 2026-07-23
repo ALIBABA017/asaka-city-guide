@@ -34,12 +34,10 @@ export function Hero({ query, onQueryChange, activeTag, onTagChange }: Props) {
           </div>
 
           <h1 className="mt-6 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            {t("hero.title.a").replace(/Asaka|Асаке|Asakadagi/, "")}
-            <span className="text-gradient">
-              {t("hero.title.a").match(/Asaka|Асаке|Asakadagi/)?.[0] ?? "Asaka"}
-            </span>
-            .<br /> {t("hero.title.b")}
+            <span className="text-gradient">{t("hero.title.a")}</span>
+            <br /> {t("hero.title.b")}
           </h1>
+
           <p className="mt-4 max-w-xl text-base text-muted-foreground">{t("hero.subtitle")}</p>
 
           <div className="mt-8 w-full max-w-2xl">
