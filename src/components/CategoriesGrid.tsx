@@ -1,15 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import { categories } from "@/lib/mock-data";
+import { useI18n } from "@/lib/i18n";
 
 export function CategoriesGrid() {
+  const { t } = useI18n();
   return (
     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <div className="mb-6 flex items-end justify-between">
         <div>
-          <h2 className="text-2xl font-semibold text-white">Browse categories</h2>
-          <p className="text-sm text-muted-foreground">Everything you need, sorted for you.</p>
+          <h2 className="text-2xl font-semibold text-white">{t("categories.title")}</h2>
+          <p className="text-sm text-muted-foreground">{t("categories.subtitle")}</p>
         </div>
       </div>
+
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
         {categories.map((c) => (
           <Link

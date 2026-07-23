@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import type { Business } from "@/lib/mock-data";
 import { useState } from "react";
+import { useI18n } from "@/lib/i18n";
 
 export function BusinessCard({ b }: { b: Business }) {
   const [booking, setBooking] = useState(false);
+  const { t } = useI18n();
 
   return (
     <article className="glass group relative flex flex-col overflow-hidden rounded-2xl shadow-card transition hover:border-white/20">
@@ -34,7 +36,7 @@ export function BusinessCard({ b }: { b: Business }) {
         </div>
 
         <div className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-teal/15 px-2.5 py-1 text-xs text-teal">
-          <span className="h-1.5 w-1.5 rounded-full bg-teal" /> Open now
+          <span className="h-1.5 w-1.5 rounded-full bg-teal" /> {t("card.openNow")}
         </div>
       </Link>
 
@@ -43,7 +45,7 @@ export function BusinessCard({ b }: { b: Business }) {
           href={`tel:${b.phone}`}
           className="flex-1 rounded-xl bg-white/5 py-2 text-center text-sm text-white transition hover:bg-white/10"
         >
-          📞 Call
+          📞 {t("card.call")}
         </a>
         <a
           href={`https://maps.google.com/?q=${encodeURIComponent(b.name + " Asaka")}`}
@@ -51,7 +53,7 @@ export function BusinessCard({ b }: { b: Business }) {
           rel="noreferrer"
           className="flex-1 rounded-xl bg-white/5 py-2 text-center text-sm text-white transition hover:bg-white/10"
         >
-          🧭 Directions
+          🧭 {t("card.directions")}
         </a>
         <button
           type="button"
@@ -61,7 +63,7 @@ export function BusinessCard({ b }: { b: Business }) {
           }}
           className="flex-1 rounded-xl bg-gradient-brand py-2 text-sm font-medium text-white shadow-glow"
         >
-          Book
+          {t("card.book")}
         </button>
       </div>
 
@@ -74,22 +76,20 @@ export function BusinessCard({ b }: { b: Business }) {
             className="glass w-full max-w-md rounded-2xl p-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <h4 className="text-lg font-semibold text-white">Book at {b.name}</h4>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Quick booking coming soon. For now, tap Call to reserve.
-            </p>
+            <h4 className="text-lg font-semibold text-white">{t("card.book.title", { name: b.name })}</h4>
+            <p className="mt-1 text-sm text-muted-foreground">{t("card.book.desc")}</p>
             <div className="mt-4 flex justify-end gap-2">
               <button
                 onClick={() => setBooking(false)}
                 className="rounded-lg bg-white/5 px-4 py-2 text-sm text-white hover:bg-white/10"
               >
-                Close
+                {t("card.close")}
               </button>
               <a
                 href={`tel:${b.phone}`}
                 className="rounded-lg bg-gradient-brand px-4 py-2 text-sm font-medium text-white shadow-glow"
               >
-                Call {b.phone}
+                {t("card.call")} {b.phone}
               </a>
             </div>
           </div>
