@@ -220,23 +220,19 @@ function BusinessPage() {
             {/* Tabs */}
             <section className="glass rounded-2xl p-6">
               <div className="flex gap-2 rounded-xl bg-white/5 p-1">
-                {(["menu", "reviews", "book"] as const).map((t) => (
+                {(["menu", "reviews", "book"] as const).map((key) => (
                   <button
-                    key={t}
-                    onClick={() => setTab(t)}
+                    key={key}
+                    onClick={() => setTab(key)}
                     className={
-                      "flex-1 rounded-lg px-3 py-2 text-sm font-medium capitalize transition " +
-                      (tab === t
+                      "flex-1 rounded-lg px-3 py-2 text-sm font-medium transition " +
+                      (tab === key
                         ? "bg-gradient-brand text-white shadow-glow"
                         : "text-muted-foreground hover:text-white")
                     }
                   >
-                    {t(t === undefined ? "" : `biz.${t}`) /* fallback */ && null}
-                    {(function () { return null; })()}
-                    {t === undefined ? null : null}
-                    {/* label */}
-                    {t === undefined ? "" : ""}
-                    {t === undefined ? "" : ""}
+                    {t(`biz.${key}`)}
+
 
                   </button>
                 ))}
