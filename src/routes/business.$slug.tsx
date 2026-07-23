@@ -91,6 +91,7 @@ const RELATED = [
 
 function BusinessPage() {
   const b = Route.useLoaderData();
+  const { t } = useI18n();
   const [tab, setTab] = useState<"menu" | "reviews" | "book">("menu");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [chatOpen, setChatOpen] = useState(false);
@@ -98,6 +99,7 @@ function BusinessPage() {
     { from: "ai", text: "Hi! Ask me about Osh Markazi." },
   ]);
   const [chatInput, setChatInput] = useState("");
+
 
   const todayIdx = useMemo(() => {
     const js = new Date().getDay(); // 0=Sun
@@ -117,8 +119,9 @@ function BusinessPage() {
 
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <Link to="/" className="text-sm text-muted-foreground hover:text-white">
-          ← Back
+          {t("biz.back")}
         </Link>
+
 
         {/* Cover */}
         <div className="glass mt-4 overflow-hidden rounded-3xl">
@@ -138,15 +141,16 @@ function BusinessPage() {
               </div>
             </div>
             <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-teal/15 px-3 py-1 text-sm text-teal">
-              <span className="h-1.5 w-1.5 rounded-full bg-teal" /> Open now
+              <span className="h-1.5 w-1.5 rounded-full bg-teal" /> {t("card.openNow")}
             </div>
+
 
             <div className="mt-6 grid gap-2 sm:grid-cols-2">
               <a
                 href={`tel:${b.phone}`}
                 className="rounded-xl bg-white/5 py-3 text-center text-sm text-white hover:bg-white/10"
               >
-                📞 Call {b.phone}
+                📞 {t("card.call")} {b.phone}
               </a>
               <a
                 href={`https://maps.google.com/?q=${encodeURIComponent(b.name + " Asaka")}`}
@@ -154,8 +158,9 @@ function BusinessPage() {
                 rel="noreferrer"
                 className="rounded-xl bg-white/5 py-3 text-center text-sm text-white hover:bg-white/10"
               >
-                🧭 Directions
+                🧭 {t("card.directions")}
               </a>
+
             </div>
           </div>
         </div>
@@ -165,7 +170,7 @@ function BusinessPage() {
           <div className="space-y-6 lg:col-span-2">
             {/* About */}
             <section className="glass rounded-2xl p-6">
-              <h2 className="text-xl font-semibold text-white">About</h2>
+              <h2 className="text-xl font-semibold text-white">{t("biz.about")}</h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Authentic Uzbek cuisine since 2010. Famous for our signature plov, samsa, and
                 lagman. Family-owned restaurant using recipes passed down through three
@@ -182,15 +187,16 @@ function BusinessPage() {
                 </div>
                 <div>
                   <div className="text-lg font-semibold text-white">Abdulla Karimov</div>
-                  <div className="text-sm text-muted-foreground">Owner & Head Chef</div>
+                  <div className="text-sm text-muted-foreground">{t("biz.owner")}</div>
                   <div className="text-xs text-teal">Since 2010</div>
+
                 </div>
               </div>
             </section>
 
             {/* Hours */}
             <section className="glass rounded-2xl p-6">
-              <h2 className="text-xl font-semibold text-white">Working Hours</h2>
+              <h2 className="text-xl font-semibold text-white">{t("biz.hours")}</h2>
               <div className="mt-3 divide-y divide-white/10 overflow-hidden rounded-xl border border-white/10">
                 {HOURS.map((h, i) => (
                   <div
@@ -203,7 +209,7 @@ function BusinessPage() {
                     }
                   >
                     <span className={i === todayIdx ? "font-semibold text-white" : ""}>
-                      {h.day} {i === todayIdx && <span className="ml-1 text-xs text-brand">• Today</span>}
+                      {h.day} {i === todayIdx && <span className="ml-1 text-xs text-brand">{t("biz.today")}</span>}
                     </span>
                     <span className={i === todayIdx ? "text-white" : ""}>{h.hours}</span>
                   </div>
@@ -225,7 +231,13 @@ function BusinessPage() {
                         : "text-muted-foreground hover:text-white")
                     }
                   >
-                    {t === "book" ? "Book Table" : t}
+                    {t(t === undefined ? "" : `biz.${t}`) /* fallback */ && null}
+                    {(function () { return null; })()}
+                    {t === undefined ? null : null}
+                    {/* label */}
+                    {t === undefined ? "" : ""}
+                    {t === undefined ? "" : ""}
+
                   </button>
                 ))}
               </div>
