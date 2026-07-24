@@ -8,7 +8,7 @@ import { Sidebar } from "@/components/Sidebar";
 import { Trending } from "@/components/Trending";
 import { EventsSection } from "@/components/EventsSection";
 import { Footer } from "@/components/Footer";
-import { featuredBusinesses } from "@/lib/mock-data";
+import { featuredBusinesses, allBusinesses } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
