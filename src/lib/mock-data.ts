@@ -49,35 +49,6 @@ export const featuredBusinesses: Business[] = [
     tags: ["Family Restaurant"],
   },
   {
-    slug: "asaka-medical-center",
-    name: "Asaka Medical Center",
-    category: "Multi-Specialty Clinic",
-    categorySlug: "hospitals",
-    address: "Navoi Avenue",
-    rating: 4.7,
-    distanceKm: 0.8,
-    emoji: "🩺",
-    isOpen: true,
-    phone: "+998901112233",
-    tags: ["24h Pharmacy"],
-  },
-  {
-    slug: "silk-road-cafe",
-    name: "Silk Road Café",
-    category: "Coffee & Coworking",
-    categorySlug: "restaurants",
-    address: "Mustaqillik Square",
-    rating: 4.8,
-    distanceKm: 2.1,
-    emoji: "☕",
-    isOpen: true,
-    phone: "+998907778899",
-    tags: ["Family Restaurant"],
-  },
-];
-
-export const trending: Business[] = [
-  {
     slug: "choyxona-asaka",
     name: "Choyxona Asaka",
     category: "Grill & Shashlik",
@@ -90,6 +61,22 @@ export const trending: Business[] = [
     phone: "+998903334455",
     tags: ["Family Restaurant"],
   },
+  {
+    slug: "asaka-medical-center",
+    name: "Asaka Medical Center",
+    category: "Multi-Specialty Clinic",
+    categorySlug: "hospitals",
+    address: "Navoi Avenue",
+    rating: 4.7,
+    distanceKm: 0.8,
+    emoji: "🩺",
+    isOpen: true,
+    phone: "+998901112233",
+    tags: ["24h Pharmacy"],
+  },
+];
+
+export const trending: Business[] = [
   {
     slug: "fitlife-gym",
     name: "FitLife Gym",
@@ -116,7 +103,21 @@ export const trending: Business[] = [
     phone: "+998908889900",
     tags: ["English Courses"],
   },
+  {
+    slug: "silk-road-cafe",
+    name: "Silk Road Café",
+    category: "Coffee & Coworking",
+    categorySlug: "restaurants",
+    address: "Mustaqillik Square",
+    rating: 4.8,
+    distanceKm: 2.1,
+    emoji: "☕",
+    isOpen: true,
+    phone: "+998907778899",
+    tags: ["Family Restaurant"],
+  },
 ];
+
 
 export const popularTags = [
   "24h Pharmacy",
