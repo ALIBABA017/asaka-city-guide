@@ -59,9 +59,14 @@ function CategoryPage() {
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {items.length === 0 ? (
-            <div className="glass col-span-full rounded-2xl p-10 text-center text-muted-foreground">
-              No listings yet in this category. Be the first to list.
+            <div className="glass col-span-full rounded-2xl p-10 text-center">
+              <div className="text-5xl">🚧</div>
+              <h2 className="mt-4 text-xl font-semibold text-white">Coming soon</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                We're onboarding {c.name.toLowerCase()} in Asaka. Check back shortly.
+              </p>
             </div>
+
           ) : (
             items.map((b) => <BusinessCard key={b.slug} b={b} />)
           )}

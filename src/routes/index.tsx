@@ -8,7 +8,7 @@ import { Sidebar } from "@/components/Sidebar";
 import { Trending } from "@/components/Trending";
 import { EventsSection } from "@/components/EventsSection";
 import { Footer } from "@/components/Footer";
-import { featuredBusinesses } from "@/lib/mock-data";
+import { featuredBusinesses, allBusinesses } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,7 +42,8 @@ function Index() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return featuredBusinesses.filter((b) => {
+    const source = q ? allBusinesses : featuredBusinesses;
+    return source.filter((b) => {
       const matchesQ =
         !q ||
         b.name.toLowerCase().includes(q) ||
@@ -52,6 +53,7 @@ function Index() {
       return matchesQ && matchesTag;
     });
   }, [query, tag]);
+
 
   return (
     <div className="min-h-screen">
