@@ -7,31 +7,31 @@ import { FeaturedBusinesses } from "@/components/FeaturedBusinesses";
 import { Sidebar } from "@/components/Sidebar";
 import { Trending } from "@/components/Trending";
 import { EventsSection } from "@/components/EventsSection";
+import { HowItWorks } from "@/components/HowItWorks";
+import { WhyAsaka } from "@/components/WhyAsaka";
 import { Footer } from "@/components/Footer";
+import { MobileNav } from "@/components/MobileNav";
 import { featuredBusinesses, allBusinesses } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Smart Asaka — Everything in Asaka. One platform." },
+      { title: "Smart Asaka — Asakadagi hamma narsa" },
       {
         name: "description",
         content:
-          "Discover 1,200+ restaurants, clinics, schools, and services in Asaka, Uzbekistan. Real reviews, live hours, one-tap booking.",
+          "Restoranlar, klinikalar, do'konlar va xizmatlarni toping. Asaka shahri uchun raqamli platforma.",
       },
-      { property: "og:title", content: "Smart Asaka — City Directory for Asaka" },
-      { property: "og:description", content: "Find and book the best places in Asaka." },
+      { property: "og:title", content: "Smart Asaka — Asakadagi hamma narsa" },
+      {
+        property: "og:description",
+        content:
+          "Restoranlar, klinikalar, do'konlar va xizmatlarni toping. Asaka shahri uchun raqamli platforma.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
-      },
-    ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Index,
 });
@@ -56,7 +56,7 @@ function Index() {
 
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen animate-fade-in pb-16 md:pb-0">
       <Navbar />
       <Hero
         query={query}
@@ -76,8 +76,11 @@ function Index() {
       </div>
 
       <Trending />
+      <HowItWorks />
+      <WhyAsaka />
       <EventsSection />
       <Footer />
+      <MobileNav />
     </div>
   );
 }
