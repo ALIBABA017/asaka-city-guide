@@ -35,11 +35,12 @@ export const mySupabase = new Proxy({} as SupabaseClient, {
   },
 });
 
-// Table names exactly as they exist in your database.
+// Table names exactly as they exist in your database (verified against PostgREST).
+// NOTE: `Users` is capitalised in your schema, and there is no `bookings` table yet.
 export const TABLES = {
   business: "business",
-  users: "users",
-  bookings: "bookings",
+  users: "Users",
+  bookings: "bookings", // does not exist yet — booking writes will fail until you create it
   reviews: "reviews",
 } as const;
 
