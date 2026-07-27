@@ -62,7 +62,7 @@ export function Navbar() {
             {t("nav.signIn")}
           </Link>
           <Link
-            to="/business/register"
+            to="/list-business"
             className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-brand px-4 py-2 text-sm font-medium text-white shadow-glow transition hover:scale-[1.02]"
           >
             <span>{t("nav.listBusiness")}</span>
