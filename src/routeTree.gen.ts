@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ListBusinessRouteImport } from './routes/list-business'
 import { Route as JobsRouteImport } from './routes/jobs'
 import { Route as ForBusinessRouteImport } from './routes/for-business'
 import { Route as ExploreRouteImport } from './routes/explore'
@@ -20,6 +21,11 @@ import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 import { Route as BusinessRegisterRouteImport } from './routes/business.register'
 import { Route as BusinessSlugRouteImport } from './routes/business.$slug'
 
+const ListBusinessRoute = ListBusinessRouteImport.update({
+  id: '/list-business',
+  path: '/list-business',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JobsRoute = JobsRouteImport.update({
   id: '/jobs',
   path: '/jobs',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/explore': typeof ExploreRoute
   '/for-business': typeof ForBusinessRoute
   '/jobs': typeof JobsRoute
+  '/list-business': typeof ListBusinessRoute
   '/business/$slug': typeof BusinessSlugRoute
   '/business/register': typeof BusinessRegisterRoute
   '/category/$slug': typeof CategorySlugRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/explore': typeof ExploreRoute
   '/for-business': typeof ForBusinessRoute
   '/jobs': typeof JobsRoute
+  '/list-business': typeof ListBusinessRoute
   '/business/$slug': typeof BusinessSlugRoute
   '/business/register': typeof BusinessRegisterRoute
   '/category/$slug': typeof CategorySlugRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/explore': typeof ExploreRoute
   '/for-business': typeof ForBusinessRoute
   '/jobs': typeof JobsRoute
+  '/list-business': typeof ListBusinessRoute
   '/business/$slug': typeof BusinessSlugRoute
   '/business/register': typeof BusinessRegisterRoute
   '/category/$slug': typeof CategorySlugRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/explore'
     | '/for-business'
     | '/jobs'
+    | '/list-business'
     | '/business/$slug'
     | '/business/register'
     | '/category/$slug'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/explore'
     | '/for-business'
     | '/jobs'
+    | '/list-business'
     | '/business/$slug'
     | '/business/register'
     | '/category/$slug'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/explore'
     | '/for-business'
     | '/jobs'
+    | '/list-business'
     | '/business/$slug'
     | '/business/register'
     | '/category/$slug'
@@ -154,6 +166,7 @@ export interface RootRouteChildren {
   ExploreRoute: typeof ExploreRoute
   ForBusinessRoute: typeof ForBusinessRoute
   JobsRoute: typeof JobsRoute
+  ListBusinessRoute: typeof ListBusinessRoute
   BusinessSlugRoute: typeof BusinessSlugRoute
   BusinessRegisterRoute: typeof BusinessRegisterRoute
   CategorySlugRoute: typeof CategorySlugRoute
@@ -161,6 +174,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/list-business': {
+      id: '/list-business'
+      path: '/list-business'
+      fullPath: '/list-business'
+      preLoaderRoute: typeof ListBusinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/jobs': {
       id: '/jobs'
       path: '/jobs'
@@ -252,6 +272,7 @@ const rootRouteChildren: RootRouteChildren = {
   ExploreRoute: ExploreRoute,
   ForBusinessRoute: ForBusinessRoute,
   JobsRoute: JobsRoute,
+  ListBusinessRoute: ListBusinessRoute,
   BusinessSlugRoute: BusinessSlugRoute,
   BusinessRegisterRoute: BusinessRegisterRoute,
   CategorySlugRoute: CategorySlugRoute,
@@ -259,13 +280,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
