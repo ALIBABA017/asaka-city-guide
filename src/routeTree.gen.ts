@@ -15,6 +15,7 @@ import { Route as ForBusinessRouteImport } from './routes/for-business'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsIdRouteImport } from './routes/events.$id'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
@@ -51,6 +52,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -79,6 +85,7 @@ const BusinessSlugRoute = BusinessSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/events': typeof EventsRouteWithChildren
   '/explore': typeof ExploreRoute
@@ -92,6 +99,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/events': typeof EventsRouteWithChildren
   '/explore': typeof ExploreRoute
@@ -106,6 +114,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/events': typeof EventsRouteWithChildren
   '/explore': typeof ExploreRoute
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/auth'
     | '/events'
     | '/explore'
@@ -134,6 +144,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/auth'
     | '/events'
     | '/explore'
@@ -147,6 +158,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/auth'
     | '/events'
     | '/explore'
@@ -161,6 +173,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   EventsRoute: typeof EventsRouteWithChildren
   ExploreRoute: typeof ExploreRoute
@@ -216,6 +229,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -267,6 +287,7 @@ const EventsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   EventsRoute: EventsRouteWithChildren,
   ExploreRoute: ExploreRoute,
